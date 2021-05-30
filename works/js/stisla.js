@@ -59,7 +59,7 @@ $(function() {
 		let $element = '<div class="article-read">';
 				$element += '<div class="article-read-inner">';
 				$element += '<div class="article-back">';
-				$element += '<a class="btn btn-outline-primary"><i class="ion ion-chevron-left"></i> Back</a>';
+				$element += '<a class="btn btn-outline-primary"><i class="ion ion-chevron-left"></i> 返回</a>';
 				$element += '</div>';
 				$element += '<h1 class="article-title">{title}</h1>';
 				$element += '<div class="article-metas">';
