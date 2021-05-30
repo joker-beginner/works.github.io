@@ -48,34 +48,36 @@ $(function() {
 		});
 	});
 
-	$("[data-toggle=read]").click(function() {
+	$(".col-spacing").children('.col-12').click(function() {
 		let $this = $(this),
-				$id = $this.attr("id");
-
+			$id = $this.attr("id");
+			index = $this.index();
 		$("body").css({
 			overflow: "hidden"
 		});
+		
+		console.log(index)
 
 		let $element = '<div class="article-read">';
 				$element += '<div class="article-read-inner">';
 				$element += '<div class="article-back">';
 				$element += '<a class="btn btn-outline-primary"><i class="ion ion-chevron-left"></i> 返回</a>';
 				$element += '</div>';
-				$element += '<h1 class="article-title">{title}</h1>';
+				$element += '<h1 class="article-title">{data.title}</h1>';
 				$element += '<div class="article-metas">';
 				$element += '<div class="meta">';
-				$element += '	{date}';
+				$element += '	{data.date}';
 				$element += '</div>';
 				$element += '<div class="meta">';
-				$element += '	{category}';
+				$element += '	{data.category}';
 				$element += '</div>';
 				$element += '<div class="meta">';
-				$element += '	{author}';
+				$element += '	{data.author}';
 				$element += '</div>';
 				$element += '</div>';
-				$element += '<figure class="article-picture"><img src="{picture}"></figure>';
+				$element += '<figure class="article-picture"><img src="{data.picture}"></figure>';
 				$element += '<div class="article-content">';
-				$element += '{content}';
+				$element += '{data.content}';
 				$element += '</div>';
 				$element += '</div>';
 				$element += '</div>';
@@ -114,29 +116,29 @@ $(function() {
 		return false;
 	});
 
-	$("#contact-form").submit(function() {
-		let $this = $(this);
-		$.ajax({
-			url: 'server/send.php',
-			type: "post",
-			data: $this.serialize(),
-			dataType: 'json',
-			beforeSend: function() {
-				loading.show();
-			},
-			complete: function() {
-				loading.hide();
-			},
-			success: function(data) {
-				if(data.status == true) {
-					swal("Success", data.data, "success");
-					$this[0].reset();
-				}else{
-					swal("Failed", data.data, "error");
-				}
-			}
-		});
-		return false;
-	});
+	// $("#contact-form").submit(function() {
+	// 	let $this = $(this);
+	// 	$.ajax({
+	// 		url: 'server/send.php',
+	// 		type: "post",
+	// 		data: $this.serialize(),
+	// 		dataType: 'json',
+	// 		beforeSend: function() {
+	// 			loading.show();
+	// 		},
+	// 		complete: function() {
+	// 			loading.hide();
+	// 		},
+	// 		success: function(data) {
+	// 			if(data.status == true) {
+	// 				swal("Success", data.data, "success");
+	// 				$this[0].reset();
+	// 			}else{
+	// 				swal("Failed", data.data, "error");
+	// 			}
+	// 		}
+	// 	});
+	// 	return false;
+	// });
 
 });
