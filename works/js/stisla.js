@@ -47,77 +47,36 @@ $(function() {
 			}
 		});
 	});
-
 	$(".col-spacing").children('.col-12').click(function() {
-		let $this = $(this),
-			$id = $this.attr("id");
-			index = $this.index();
-		$("body").css({
-			overflow: "hidden"
-		});
-		
-		console.log(index)
-
+		let $this = $(this);
+		index = $this.index();
 		$.ajax({
 			url: "mock/article.json",
 			dataType: 'json',
-			beforeSend: function() {
-				loading.show();
-			},
-			complete: function() {
-				loading.hide();
-			},
 			success: function(data) {
-				let $element = '<div class="article-read">';
-				$element += '<div class="article-read-inner">';
-				$element += '<div class="article-back">';
-				$element += '<a class="btn btn-outline-primary"><i class="ion ion-chevron-left"></i> 返回</a>';
-				$element += '</div>';
-				$element += '<h1 class="article-title">'+data[index].title+'</h1>';
-				// $element += '<div class="article-metas">';
-				// $element += '<div class="meta">'+data[index].date+'</div>';
-				// $element += '<div class="meta">'+data[index].category+'</div>';
-				// $element += '<div class="meta">'+data[index].author+'</div>';
-				// $element += '</div>';
-				$element += '<figure class="article-picture"><img src="'+data[index].picture+'"></figure>';
-				$element += '<div class="article-content">'+data[index].content+'</div>';
-				$element += '</div>';
-				$element += '</div>';
+				var orderData = {
+	            	"roomNum": roomNum,
+	            	"orderDay" : orderDay,
+	            	"orderTime": orderTime
+	            };
+	            var jsonStr = JSON.stringify(orderData);
+				window.location.href = "/works/works.html?id="+index+"orderData"+jsonStr;
 
-				let reg = /{([a-zA-Z0-9]+)}/g,
-						res = [],
-						element = $element;
-
-				console.log(data[index])
-
-				while(match = reg.exec($element)) {
-					element = element.replace('{' + match[index] + '}', data[match[index]]);
-				}
-
-
-				$("body").prepend(element);
-				$(".article-read").fadeIn();
-				$(document).on("click", ".article-back .btn", function() {
-					$(".article-read").fadeOut(function() {
-						$(".article-read").remove();
-						$("body").css({
-							overflow: 'auto'
-						});
-					});
-					return false;
-				});
 			}
 		});
-
-		return false;
 	});
+	// $(".col-spacing").children('.col-12').click(function() {
+	// 	let $this = $(this),
+	// 		$id = $this.attr("id");
+	// 		index = $this.index();
+	// 	$("body").css({
+	// 		overflow: "hidden"
+	// 	});
+		
+	// 	console.log(index)
 
-	// $("#contact-form").submit(function() {
-	// 	let $this = $(this);
 	// 	$.ajax({
-	// 		url: 'server/send.php',
-	// 		type: "post",
-	// 		data: $this.serialize(),
+	// 		url: "mock/article.json",
 	// 		dataType: 'json',
 	// 		beforeSend: function() {
 	// 			loading.show();
@@ -126,14 +85,39 @@ $(function() {
 	// 			loading.hide();
 	// 		},
 	// 		success: function(data) {
-	// 			if(data.status == true) {
-	// 				swal("Success", data.data, "success");
-	// 				$this[0].reset();
-	// 			}else{
-	// 				swal("Failed", data.data, "error");
+	// 			let $element = '<div class="article-read">';
+	// 			$element += '<div class="article-read-inner">';
+	// 			$element += '<div class="article-back">';
+	// 			$element += '<a class="btn btn-outline-primary"><i class="ion ion-chevron-left"></i> 返回</a>';
+	// 			$element += '</div>';
+	// 			$element += '<h1 class="article-title">'+data[index].title+'</h1>';
+	// 			$element += '<figure class="article-picture"><img src="'+data[index].picture+'"></figure>';
+	// 			$element += '<div class="article-content"><p>项目简介：</p>'+data[index].content+'</div>';
+	// 			$element += '</div>';
+	// 			$element += '</div>';
+
+	// 			let reg = /{([a-zA-Z0-9]+)}/g,
+	// 					res = [],
+	// 					element = $element;
+
+	// 			while(match = reg.exec($element)) {
+	// 				element = element.replace('{' + match[index] + '}', data[match[index]]);
 	// 			}
+
+	// 			$("body").prepend(element);
+	// 			$(".article-read").fadeIn();
+	// 			$(document).on("click", ".article-back .btn", function() {
+	// 				$(".article-read").fadeOut(function() {
+	// 					$(".article-read").remove();
+	// 					$("body").css({
+	// 						overflow: 'auto'
+	// 					});
+	// 				});
+	// 				return false;
+	// 			});
 	// 		}
 	// 	});
+
 	// 	return false;
 	// });
 
